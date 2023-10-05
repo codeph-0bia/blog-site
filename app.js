@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
+const _ = require('lodash');
 
 const posts = []
 
@@ -22,6 +23,17 @@ app.get("/contact", (req, res) => res.render("contact", { content: contactConten
 
 app.get("/compose", (req, res) => res.render('compose'));
 
+app.get("/posts/:param", (req, res) => {
+    const postParam = _.lowerCase(req.params.param);
+    posts.forEach(e => {
+        const pT = _.lowerCase(e.title);
+
+        if (postParam === pT) {
+            res.render('post', { title: e.title, content: e.content })
+        }
+    })
+});
+
 app.post("/compose", (req, res) => {
     const post = {
         title: req.body.postTitle,
@@ -30,6 +42,7 @@ app.post("/compose", (req, res) => {
     posts.push(post);
     res.redirect("/")
 })
+
 
 
 
