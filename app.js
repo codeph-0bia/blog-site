@@ -37,7 +37,7 @@ app.get("/posts/:param", (req, res) => {
 app.post("/compose", (req, res) => {
     const post = {
         title: req.body.postTitle,
-        content: req.body.postBody
+        content: req.body.postBody,
     }
     posts.push(post);
     res.redirect("/")
