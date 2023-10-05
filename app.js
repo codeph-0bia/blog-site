@@ -25,11 +25,11 @@ app.get("/compose", (req, res) => res.render('compose'));
 
 app.get("/posts/:param", (req, res) => {
     const postParam = _.lowerCase(req.params.param);
-    posts.forEach(e => {
-        const pT = _.lowerCase(e.title);
+    posts.forEach(post => {
+        const postTitle = _.lowerCase(post.title);
 
-        if (postParam === pT) {
-            res.render('post', { title: e.title, content: e.content })
+        if (postParam === postTitle) {
+            res.render('post', { title: post.title, content: post.content })
         }
     })
 });
